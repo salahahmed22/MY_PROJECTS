@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدونة صلاح أحمد</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #3498db;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            margin: 0;
+            color: #fff;
+        }
+        nav ul {
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li {
+            margin-right: 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #f1c40f;
+        }
+        .theme-toggle {
+            cursor: pointer;
+            font-size: 1.5em;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            color: #3498db;
+            transition: color 0.3s;
+        }
+        .theme-toggle:hover {
+            color: #f1c40f;
+        }
+        section {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .blog-post {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .blog-post h2 {
+            margin-top: 0;
+            color: #3498db;
+        }
+        .blog-post p {
+            line-height: 1.6;
+        }
+        .blog-post ul {
+            padding-right: 20px;
+        }
+        .blog-post ul li {
+            margin-bottom: 10px;
+        }
+        .blog-post .actions {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .blog-post .actions button {
+            background: none;
+            border: none;
+            color: #3498db;
+            cursor: pointer;
+            margin-right: 10px;
+            font-size: 1em;
+        }
+        .blog-post .actions button:hover {
+            color: #2980b9;
+        }
+        .add-post-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .add-post-form input, .add-post-form textarea {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+        }
+        .add-post-form button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .add-post-form button:hover {
+            background-color: #2980b9;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: #2980b9;
+        }
+        /* الوضع الليلي */
+        body.dark-mode {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+        }
+        body.dark-mode header {
+            background-color: #34495e;
+        }
+        body.dark-mode .blog-post, body.dark-mode .add-post-form {
+            background-color: #34495e;
+            color: #ecf0f1;
+        }
+        body.dark-mode .blog-post h2 {
+            color: #3498db;
+        }
+        body.dark-mode .add-post-form input, body.dark-mode .add-post-form textarea {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            border-color: #7f8c8d;
+        }
+        body.dark-mode .add-post-form input::placeholder, body.dark-mode .add-post-form textarea::placeholder {
+            color: #bdc3c7;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav ul {
+                flex-direction: column;
+                margin-top: 10px;
+            }
+            nav ul li {
+                margin: 5px 0;
+            }
+            section {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>مدونة صلاح أحمد</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#add-post">إضافة مقال</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <h2>المقالات الأخيرة</h2>
+        <div id="blog-posts">
+            <!-- المقالات ستظهر هنا -->
+        </div>
+    </section>
+
+    <section id="add-post" style="display: none;">
+        <h2>إضافة مقال جديد</h2>
+        <div class="add-post-form">
+            <input type="text" id="post-title" placeholder="عنوان المقال" required />
+            <textarea id="post-content" placeholder="محتوى المقال" rows="10" required></textarea>
+            <button onclick="addPost()">نشر المقال</button>
+            <a href="#home" class="back-button">رجوع</a>
+        </div>
+    </section>
+
+    <!-- زر الوضع الليلي -->
+    <div class="theme-toggle" onclick="toggleTheme()">🌙</div>
+
+    <script>
+        // بيانات المقالات (سيتم تحميلها من localStorage أو استخدام بيانات افتراضية)
+        let posts = JSON.parse(localStorage.getItem('posts')) || [
+            {
+                title: "التحديات: دروس الحياة التي تصنعنا",
+                content: `
+                    <p>الحياة ليست طريقًا مُعبَّدًا بالورود، بل هي رحلة مليئة بالتحديات والعقبات. هذه التحديات ليست عوائق، بل هي دروس تُعلِّمنا كيف ننمو، نتعلم، ونصبح أقوى.</p>
+                    <ul>
+                        <li><strong>التحديات تُظهر قوتنا الداخلية:</strong> عندما نواجه صعوبات، نكتشف أننا أقوى مما كنا نعتقد. التحديات تدفعنا إلى تجاوز حدودنا، وتُظهر لنا أننا قادرون على تحقيق ما كنا نظنه مستحيلًا.</li>
+                        <li><strong>الفشل هو بداية النجاح:</strong> كل فشل هو خطوة نحو النجاح. عندما نفشل، نتعلم دروسًا لا تُقدَّر بثمن. الفشل ليس نهاية الطريق، بل هو بداية لفهم أفضل لذاتنا وللعالم من حولنا.</li>
+                        <li><strong>التحديات تُعلِّمنا الصبر:</strong> الصبر هو مفتاح التعامل مع التحديات. عندما نتعلم أن ننتظر ونعمل بجد، نرى أن كل شيء يأتي في وقته المناسب. الصبر يُعلِّمنا أن النجاح الحقيقي يحتاج إلى وقت وجهد.</li>
+                        <li><strong>التحديات تُعزِّز الإبداع:</strong> عندما نواجه مشكلة، نبدأ في التفكير خارج الصندوق. التحديات تُحفِّزنا على إيجاد حلول إبداعية، مما يجعلنا أكثر مرونة وقدرة على التكيف مع الظروف المختلفة.</li>
+                        <li><strong>التحديات تُعلِّمنا التواضع:</strong> عندما نمر بتجارب صعبة، نتعلم أن نكون متواضعين. ندرك أننا لسنا وحدنا في هذا العالم، وأننا بحاجة إلى دعم الآخرين وتعاونهم.</li>
+                        <li><strong>التحديات تُعطينا منظورًا جديدًا:</strong> عندما نواجه صعوبات، نرى الحياة من زاوية مختلفة. نتعلم أن نقدر الأشياء الصغيرة، ونفهم أن السعادة تكمن في التفاصيل البسيطة.</li>
+                    </ul>
+                    <p><strong>الخلاصة:</strong> التحديات هي جزء لا يتجزأ من الحياة. بدلًا من الخوف منها، يجب أن نتعلم كيف نتعامل معها بحكمة وصبر. كل تحدٍّ يواجهنا هو فرصة لنتعلم، ننمو، ونصبح نسخة أفضل من أنفسنا. تذكر دائمًا: <strong>"ما لا يقتلنا يجعلنا أقوى"</strong>.</p>
+                `
+            },
+            {
+                title: "كيفية تحقيق التوازن بين العمل والحياة الشخصية",
+                content: `
+                    <p>في عالمنا السريع، أصبح من الصعب تحقيق التوازن بين العمل والحياة الشخصية. ومع ذلك، فإن التوازن بينهما ضروري لتحقيق السعادة والنجاح على المدى الطويل. إليك بعض النصائح لمساعدتك على تحقيق هذا التوازن:</p>
+                    <ul>
+                        <li><strong>حدد أولوياتك:</strong> قم بتحديد المهام الأكثر أهمية في العمل والحياة الشخصية. ركز على ما يهمك حقًا ولا تضيع وقتك في أمور غير ضرورية.</li>
+                        <li><strong>ضع حدودًا واضحة:</strong> حدد أوقاتًا محددة للعمل وأوقاتًا للراحة. لا تسمح للعمل بالتعدي على وقتك الشخصي، والعكس صحيح.</li>
+                        <li><strong>تعلم قول "لا":</strong> لا تخف من رفض المهام الإضافية إذا كانت ستؤثر على وقتك الشخصي. قول "لا" يعني أنك تحترم وقتك وطاقتك.</li>
+                        <li><strong>خصص وقتًا للراحة:</strong> الراحة ضرورية لاستعادة الطاقة. خصص وقتًا للاسترخاء وممارسة الهوايات التي تحبها.</li>
+                        <li><strong>استخدم التكنولوجيا بحكمة:</strong> التكنولوجيا يمكن أن تكون أداة رائعة لتنظيم الوقت، ولكنها قد تكون أيضًا مصدر إلهاء. استخدمها بحكمة لتسهيل حياتك.</li>
+                        <li><strong>اعتنِ بصحتك:</strong> الصحة الجسدية والعقلية هي الأساس. مارس الرياضة بانتظام، وتناول طعامًا صحيًا، واحصل على قسط كافٍ من النوم.</li>
+                        <li><strong>تواصل مع الآخرين:</strong> العلاقات الاجتماعية مهمة لتحقيق التوازن. خصص وقتًا للتواصل مع العائلة والأصدقاء.</li>
+                    </ul>
+                    <p><strong>الخلاصة:</strong> تحقيق التوازن بين العمل والحياة الشخصية ليس أمرًا سهلاً، ولكنه ممكن مع التخطيط الجيد والالتزام. تذكر أن السعادة والنجاح لا يعتمدان فقط على العمل، بل أيضًا على جودة الحياة التي تعيشها.</p>
+                `
+            }
+        ];
+
+        // عرض المقالات
+        function displayPosts() {
+            const blogPosts = document.getElementById('blog-posts');
+            blogPosts.innerHTML = '';
+            posts.forEach((post, index) => {
+                const postElement = document.createElement('div');
+                postElement.className = 'blog-post';
+                postElement.innerHTML = `
+                    <div class="actions">
+                        <button onclick="editPost(${index})">✏️</button>
+                        <button onclick="deletePost(${index})">🗑️</button>
+                    </div>
+                    <h2>${post.title}</h2>
+                    ${post.content}
+                `;
+                blogPosts.appendChild(postElement);
+            });
+        }
+
+        // إضافة مقال جديد
+        function addPost() {
+            const title = document.getElementById('post-title').value;
+            const content = document.getElementById('post-content').value;
+            if (title && content) {
+                posts.push({ title, content });
+                localStorage.setItem('posts', JSON.stringify(posts)); // حفظ المقالات في localStorage
+                displayPosts();
+                document.getElementById('post-title').value = '';
+                document.getElementById('post-content').value = '';
+                alert('تمت إضافة المقال بنجاح!');
+                window.location.href = '#home'; // العودة إلى الصفحة الرئيسية
+            } else {
+                alert('يرجى ملء جميع الحقول.');
+            }
+        }
+
+        // تعديل مقال
+        function editPost(index) {
+            const post = posts[index];
+            document.getElementById('post-title').value = post.title;
+            document.getElementById('post-content').value = post.content.replace(/<[^>]*>/g, ''); // إزالة العلامات HTML
+            document.getElementById('add-post').style.display = 'block';
+            document.getElementById('home').style.display = 'none';
+
+            // تحديث المقال بعد التعديل
+            document.querySelector('#add-post button').onclick = function() {
+                const newTitle = document.getElementById('post-title').value;
+                const newContent = document.getElementById('post-content').value;
+                if (newTitle && newContent) {
+                    posts[index] = { title: newTitle, content: newContent };
+                    localStorage.setItem('posts', JSON.stringify(posts));
+                    displayPosts();
+                    alert('تم تعديل المقال بنجاح!');
+                    window.location.href = '#home';
+                } else {
+                    alert('يرجى ملء جميع الحقول.');
+                }
+            };
+        }
+
+        // حذف مقال
+        function deletePost(index) {
+            if (confirm('هل أنت متأكد من حذف هذا المقال؟')) {
+                posts.splice(index, 1);
+                localStorage.setItem('posts', JSON.stringify(posts));
+                displayPosts();
+                alert('تم حذف المقال بنجاح!');
+            }
+        }
+
+        // تبديل الوضع الليلي
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+        }
+
+        // عرض النموذج لإضافة مقال
+        document.querySelector('a[href="#add-post"]').addEventListener('click', () => {
+            document.getElementById('home').style.display = 'none';
+            document.getElementById('add-post').style.display = 'block';
+        });
+
+        // العودة إلى الصفحة الرئيسية عند النقر على "رجوع"
+        document.querySelector('a[href="#home"]').addEventListener('click', () => {
+            document.getElementById('home').style.display = 'block';
+            document.getElementById('add-post').style.display = 'none';
+        });
+
+        // عرض المقالات عند تحميل الصفحة
+        displayPosts();
+    </script>
+</body>
+</html>
